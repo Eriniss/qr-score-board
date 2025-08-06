@@ -1,21 +1,20 @@
+// App.js
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App() {
+import { LoginPage } from './pages/LoginPage';
+import { SignupPage } from './pages/SignupPage';
+import { UserQRCodePage } from './pages/MainPage'
+
+const App = () => {
   return (
-    <div className="App">
-      <div className="App-body">
-        <div className='common-label'>아이디</div>
-        <div class="nes-field" className="common-input">
-          <input type="text" id="name_field" class="nes-input common-input-box" />
-        </div>
-        <div className='common-label'>비밀번호</div>
-        <div class="nes-field" className="common-input">
-          <input type="text" id="name_field" class="nes-input common-input-box" />
-        </div>
-        <button type="button" className="nes-btn is-primary common-button">로그인</button>
-        <button type="button" className="nes-btn common-button">회원가입</button>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage/>} />
+        <Route path="/main" element={<UserQRCodePage/>} />
+      </Routes>
+    </Router>
   );
 }
 
