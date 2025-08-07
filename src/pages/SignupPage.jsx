@@ -18,6 +18,10 @@ export const SignupPage = () => {
                 <div className="nes-field common-input">
                     <input type="password" id="username" className="nes-input common-input-box" />
                 </div>
+                <div className='common-label'>이름</div>
+                <div className="nes-field common-input">
+                    <input type="text" id="username" className="nes-input common-input-box" />
+                </div>
                 <div className='common-label'>목장</div>
                 <div className="nes-field common-input">
                     <input type="text" id="username" className="nes-input common-input-box" />
@@ -30,7 +34,7 @@ export const SignupPage = () => {
                     <option value="1">여</option>
                 </select>
                 </div>
-                <button type="button" className="nes-btn is-success common-button">회원가입</button>
+                <button type="button" className="nes-btn is-success common-button">회원가입 완료</button>
                 <button type="button" className="nes-btn common-button" onClick={() => navigate('/')}>취소</button>
             </div>
         </div>
