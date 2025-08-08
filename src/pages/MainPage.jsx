@@ -28,7 +28,7 @@ export const UserQRCodePage = () => {
 
     const fetchPoint = async () => {
             try {
-                const response = await axios.get(`https://192.168.219.154:8080/auth/user/${userData.id}`);
+                const response = await axios.get(`https://192.168.219.201:8080/auth/user/${userData.id}`);
                 console.log("불러오기 성공:", response.data);
                 setPoint(response.data.point);
             } catch (error) {
