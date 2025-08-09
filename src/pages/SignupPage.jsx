@@ -41,7 +41,7 @@ export const SignupPage = () => {
         }
 
         try {
-            const response = await axios.post("https://192.168.219.201:8080/auth/user", {
+            const response = await axios.post("https://49.167.214.132:8080/auth/user", {
                 email,
                 password,
                 name,

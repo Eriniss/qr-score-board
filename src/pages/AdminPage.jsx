@@ -33,7 +33,7 @@ export const AdminPage = () => {
         return;
       }
 
-      await axios.put(`https://192.168.219.201:8080/auth/user/${userId}`, {
+      await axios.put(`https://49.167.214.132:8080/auth/user/${userId}`, {
         point: delta
       });
 
