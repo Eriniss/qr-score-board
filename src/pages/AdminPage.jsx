@@ -65,9 +65,6 @@ export const AdminPage = () => {
           console.error("QR 처리 오류:", err);
           isProcessingRef.current = false;
         }
-      },
-      () => {
-        window.alert("QR 스캔 오류");
       }
     );
 
