@@ -15,8 +15,8 @@ const App = () => {
         <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage/>} />
         <Route path="/main" element={<UserQRCodePage/>} />
-        <Route path="/admin" element={<AdminPage/>} />
-        <Route path="/adminList" element={<AdminListPage/>} />
+        <Route path="/admin/21232f297a57a5a743894a0e4a801fc3" element={<AdminPage/>} />
+        <Route path="/adminList/21232f297a57a5a743894a0e4a801fc3" element={<AdminListPage/>} />
       </Routes>
     </Router>
   );

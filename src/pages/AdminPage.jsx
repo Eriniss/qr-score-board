@@ -95,11 +95,11 @@ export const AdminPage = () => {
               checked={isSubtract}
               onChange={(e) => setIsSubtract(e.target.checked)}
             />
-            <span>차감</span>
+            <span style={{ fontSize: 18}}>차감</span>
           </label>
         </div>
         <div id="reader" style={{ width: '300px' }} />
-        <button className="nes-btn" onClick={() => navigate("/adminList")} style={{ marginTop: 12, marginRight: 12 }}>사용자 정보 확인</button>
+        <button className="nes-btn" onClick={() => navigate("/adminList/21232f297a57a5a743894a0e4a801fc3")} style={{ marginTop: 12, marginRight: 12 }}>사용자 정보 확인</button>
       </div>
     </div>
   );

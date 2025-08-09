@@ -87,7 +87,7 @@ export const AdminListPage = () => {
                 })}
               </tbody>
             </table>
-            <button className="nes-btn" onClick={() => navigate("/admin")} style={{ marginTop: 12, marginRight: 12 }}>QR스캔 페이지로</button>
+            <button className="nes-btn" onClick={() => navigate("/admin/21232f297a57a5a743894a0e4a801fc3")} style={{ marginTop: 12, marginRight: 12 }}>QR스캔 페이지로</button>
             <button className="nes-btn" onClick={fetchUsers} style={{ marginTop: 12 }}>새로고침</button>
           </div>
         </div>
