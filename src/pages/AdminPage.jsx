@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const API_ENDPOINT_PORT = process.env.REACT_APP_API_ENDPOINT_PORT ?? "443";
@@ -7,6 +8,8 @@ const API_ENDPOINT_PROTOCOL = process.env.REACT_APP_API_ENDPOINT_PROTOCOL ?? "ht
 const API_HOSTNAME = process.env.REACT_APP_API_HOSTNAME ?? window.location.hostname;
 
 export const AdminPage = () => {
+  const navigate = useNavigate();
+
   const [delta, setDelta] = useState();
   const [isSubtract, setIsSubtract] = useState(false); // ✅ 차감 여부 상태
 
@@ -96,6 +99,7 @@ export const AdminPage = () => {
           </label>
         </div>
         <div id="reader" style={{ width: '300px' }} />
+        <button className="nes-btn" onClick={() => navigate("/adminList")} style={{ marginTop: 12, marginRight: 12 }}>사용자 정보 확인</button>
       </div>
     </div>
   );
