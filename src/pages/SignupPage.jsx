@@ -4,7 +4,7 @@ import axios from "axios";
 
 const API_ENDPOINT_PORT = process.env.REACT_APP_API_ENDPOINT_PORT ?? "443";
 const API_ENDPOINT_PROTOCOL = process.env.REACT_APP_API_ENDPOINT_PROTOCOL ?? "https";
-const hostname = window.location.hostname;
+const API_HOSTNAME = process.env.REACT_APP_API_HOSTNAME ?? window.location.hostname;
 
 export const SignupPage = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const SignupPage = () => {
     gender: ""
   });
 
-  const baseURL = `${API_ENDPOINT_PROTOCOL}://${hostname}:${API_ENDPOINT_PORT}`;
+  const baseURL = `${API_ENDPOINT_PROTOCOL}://${API_HOSTNAME}:${API_ENDPOINT_PORT}`;
 
   const handleChange = (e) => {
     const { name, value } = e.target;

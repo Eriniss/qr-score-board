@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 
 const API_ENDPOINT_PORT = process.env.REACT_APP_API_ENDPOINT_PORT ?? "443";
 const API_ENDPOINT_PROTOCOL = process.env.REACT_APP_API_ENDPOINT_PROTOCOL ?? "https";
-const hostname = window.location.hostname;
+const API_HOSTNAME = process.env.REACT_APP_API_HOSTNAME ?? window.location.hostname;
 
 export const UserQRCodePage = () => {
     const [point, setPoint] = useState("");
     const [userData, setUserData] = useState({ id: "", gender: "", name: "", group: "" });
     const navigate = useNavigate();
 
-    const baseURL = `${API_ENDPOINT_PROTOCOL}://${hostname}:${API_ENDPOINT_PORT}`;
+    const baseURL = `${API_ENDPOINT_PROTOCOL}://${API_HOSTNAME}:${API_ENDPOINT_PORT}`;
 
     // 세션에서 user 데이터 불러오기
     useEffect(() => {

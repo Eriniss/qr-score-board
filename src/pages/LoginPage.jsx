@@ -5,7 +5,7 @@ import axios from "axios";
 // ✅ 컴포넌트 밖(모듈 스코프)에 고정값 배치: 렌더와 무관
 const API_ENDPOINT_PORT = process.env.REACT_APP_API_ENDPOINT_PORT ?? "443";
 const API_ENDPOINT_PROTOCOL = process.env.REACT_APP_API_ENDPOINT_PROTOCOL ?? "https";
-const hostname = window.location.hostname;
+const API_HOSTNAME = process.env.REACT_APP_API_HOSTNAME ?? window.location.hostname;
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const baseURL = `${API_ENDPOINT_PROTOCOL}://${hostname}:${API_ENDPOINT_PORT}`;
+  const baseURL = `${API_ENDPOINT_PROTOCOL}://${API_HOSTNAME}:${API_ENDPOINT_PORT}`;
 
   const handleLogin = async () => {
     try {
