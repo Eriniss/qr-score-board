@@ -12,7 +12,7 @@ export const LoginPage = () => {
     // ✅ 로그인 버튼 클릭 시 실행
     const handleLogin = async () => {
     try {
-        const response = await axios.post("https://49.167.214.132:8080/auth/sign_in", {
+        const response = await axios.post("https://localhost:8080/auth/sign_in", {
             email: email,
             password: password
         });
