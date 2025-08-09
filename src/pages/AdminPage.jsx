@@ -7,14 +7,18 @@ const API_ENDPOINT_PROTOCOL = process.env.REACT_APP_API_ENDPOINT_PROTOCOL ?? "ht
 const API_HOSTNAME = process.env.REACT_APP_API_HOSTNAME ?? window.location.hostname;
 
 export const AdminPage = () => {
-  const [delta, setDelta] = useState(0);
+  const [delta, setDelta] = useState();
+  const [isSubtract, setIsSubtract] = useState(false); // ✅ 차감 여부 상태
 
   const baseURL = `${API_ENDPOINT_PROTOCOL}://${API_HOSTNAME}:${API_ENDPOINT_PORT}`;
 
-  // ✅ 중복 호출 방지 플래그 & 최신 delta 보관
+  // ✅ 중복 호출 방지 플래그 & 최신 값 보관
   const isProcessingRef = useRef(false);
   const deltaRef = useRef(delta);
+  const isSubtractRef = useRef(isSubtract);
+
   useEffect(() => { deltaRef.current = delta; }, [delta]);
+  useEffect(() => { isSubtractRef.current = isSubtract; }, [isSubtract]);
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner('reader', {
@@ -38,50 +42,61 @@ export const AdminPage = () => {
           const userId = qrData.id;
           if (!userId) return;
 
-          if (!deltaRef.current || Number.isNaN(deltaRef.current)) {
+          let pointValue = deltaRef.current;
+          if (!pointValue || Number.isNaN(pointValue)) {
             alert("포인트 증감 값을 먼저 입력하세요.");
             return;
           }
 
-          // ✅ 중복 방지 락 설정
+          // ✅ 차감 체크 시 음수로 변환
+          if (isSubtractRef.current) {
+            pointValue = -Math.abs(pointValue);
+          }
+
           isProcessingRef.current = true;
 
           await axios.put(`${baseURL}/auth/user/${userId}`, {
-            point: deltaRef.current,
+            point: pointValue,
           });
 
-          // 스캐너 정리 후 바로 리다이렉트
           await scanner.clear().catch(() => {});
-          window.location.replace('/admin'); // 또는 navigate('/admin')
+          window.location.replace('/admin');
         } catch (err) {
           console.error("QR 처리 오류:", err);
-          // 실패 시에도 락 해제(원하면 유지해도 됨)
           isProcessingRef.current = false;
         }
       },
-      (errorMessage) => {
-        // 인식 실패 로그 (필요시)
-        // console.warn("QR 스캔 오류:", errorMessage);
+      () => {
+        window.alert("QR 스캔 오류");
       }
     );
 
     return () => {
       scanner.clear().catch((e) => console.error('Scanner clear 실패:', e));
     };
-  }, []); // ✅ 스캐너는 한 번만 생성
+  }, []);
 
   return (
     <div className="App">
       <div className="App-body">
-        <div className='common-label'>포인트 증가/감소</div>
-        <div className="nes-field common-input">
+        <div className='common-label'>포인트</div>
+        <div className="nes-field">
           <input
             type="number"
             name="number"
             value={delta}
-            onChange={(e) => setDelta(parseInt(e.target.value, 10) || 0)}
+            onChange={(e) => setDelta(parseInt(e.target.value, 10))}
             className="nes-input common-input-box"
           />
+          <label>
+            <input
+              type="checkbox"
+              className="nes-checkbox"
+              checked={isSubtract}
+              onChange={(e) => setIsSubtract(e.target.checked)}
+            />
+            <span>차감</span>
+          </label>
         </div>
         <div id="reader" style={{ width: '300px' }} />
       </div>
