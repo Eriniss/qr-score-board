@@ -49,7 +49,7 @@ export const AdminPage = () => {
       scanner.clear();
       setTimeout(() => {
         window.location.reload(); // 또는 scanner 다시 시작
-      }, 60000);
+      }, 3000);
 
     } catch (err) {
       console.error("QR 처리 오류:", err);
