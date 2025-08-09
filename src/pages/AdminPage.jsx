@@ -2,8 +2,14 @@ import { useEffect, useState } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import axios from 'axios';
 
+const API_ENDPOINT_PORT = process.env.REACT_APP_API_ENDPOINT_PORT ?? "8080";
+const API_ENDPOINT_PROTOCOL = process.env.REACT_APP_API_ENDPOINT_PROTOCOL ?? "https";
+const hostname = window.location.hostname;
+
 export const AdminPage = () => {
   const [delta, setDelta] = useState(0); // 포인트 증감 값
+
+  const baseURL = `${API_ENDPOINT_PROTOCOL}://${hostname}:${API_ENDPOINT_PORT}`;
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner('reader', {
@@ -33,7 +39,7 @@ export const AdminPage = () => {
         return;
       }
 
-      await axios.put(`https://49.167.214.132:8080/auth/user/${userId}`, {
+      await axios.put(`${baseURL}/auth/user/${userId}`, {
         point: delta
       });
 

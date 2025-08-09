@@ -3,10 +3,16 @@ import { QRCodeCanvas } from 'qrcode.react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const API_ENDPOINT_PORT = process.env.REACT_APP_API_ENDPOINT_PORT ?? "8080";
+const API_ENDPOINT_PROTOCOL = process.env.REACT_APP_API_ENDPOINT_PROTOCOL ?? "https";
+const hostname = window.location.hostname;
+
 export const UserQRCodePage = () => {
     const [point, setPoint] = useState("");
     const [userData, setUserData] = useState({ id: "", gender: "", name: "", group: "" });
     const navigate = useNavigate();
+
+    const baseURL = `${API_ENDPOINT_PROTOCOL}://${hostname}:${API_ENDPOINT_PORT}`;
 
     // 세션에서 user 데이터 불러오기
     useEffect(() => {
@@ -28,7 +34,7 @@ export const UserQRCodePage = () => {
 
     const fetchPoint = async () => {
             try {
-                const response = await axios.get(`https://localhost:8080/auth/user/${userData.id}`);
+                const response = await axios.get(`${baseURL}/auth/user/${userData.id}`);
                 console.log("불러오기 성공:", response.data);
                 setPoint(response.data.point);
             } catch (error) {
